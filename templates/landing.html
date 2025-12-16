@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>AfroED</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="landing-body">
+  <main class="landing">
+    <header class="brand">
+      <img class="logo" src="{{ url_for('static', filename='afroed-logo.svg') }}" alt="AfroED logo">
+      <div>
+        <h1>AfroED</h1>
+        <p class="tagline">Opportunities, organized. Education, unlocked.</p>
+      </div>
+    </header>
+
+    <section class="hero">
+      <p class="hero-text">
+        A clean database of educational opportunities — built for clarity, access, and momentum.
+      </p>
+
+      <div class="cta-row">
+        <a class="cta" href="/signup">Create an account</a>
+        <a class="cta secondary" href="#learn">Learn more</a>
+      </div>
+
+      <div class="play">
+        <p class="play-label">Click the shape 👇</p>
+        <button id="shape" class="shape" aria-label="Toggle shape"></button>
+        <p id="shapeHint" class="play-hint">Square today. Circle tomorrow.</p>
+      </div>
+    </section>
+
+    <section id="learn" class="learn">
+      <h2>What AfroED will do</h2>
+      <ul>
+        <li>Search scholarships, programs, and schools in one place</li>
+        <li>Community discussions and verified announcements</li>
+        <li>Partners, ambassadors, and local insights</li>
+      </ul>
+    </section>
+
+    <footer class="footer">
+      <span>© {{ year }} AfroED</span>
+    </footer>
+  </main>
+
+  <script src="{{ url_for('static', filename='landing.js') }}"></script>
+</body>
+</html>
