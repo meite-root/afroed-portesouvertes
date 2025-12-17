@@ -1,7 +1,11 @@
-from flask import Flask, render_template, request, redirect
+import os
+import json
+from flask import Flask, render_template, request, redirect, jsonify
 from datetime import datetime
+from openai import OpenAI
 
 app = Flask(__name__)
+client = OpenAI()
 
 # For now, just store "users" in memory (later: DB)
 users = []
@@ -42,14 +46,6 @@ if __name__ == "__main__":
     app.run(debug=True)
 
 # ============= PATHWAYS ==============
-import os
-import json
-from flask import Flask, render_template, request, redirect, jsonify
-from datetime import datetime
-from openai import OpenAI
-
-app = Flask(__name__)
-client = OpenAI()
 
 SUBJECTS = [
     "Mathematics", "Economics", "Computer Science", "Biology", "Chemistry",
