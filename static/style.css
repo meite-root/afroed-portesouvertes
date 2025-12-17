@@ -175,3 +175,79 @@ button {
   margin-top: 18px;
   color: rgba(229,231,235,0.65);
 }
+
+
+/* Smooth overall motion */
+* { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+
+/* Page entrance */
+.landing {
+  animation: enter 420ms ease both;
+}
+@keyframes enter {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Logo micro-tilt */
+.logo {
+  transition: transform 220ms ease, box-shadow 220ms ease;
+}
+.logo:hover {
+  transform: translateY(-2px) rotate(-2deg);
+  box-shadow: 0 10px 22px rgba(0,0,0,0.18);
+}
+
+/* Hero “card” hover */
+.hero {
+  transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+}
+.hero:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 34px rgba(0,0,0,0.22);
+  border-color: rgba(255,255,255,0.18);
+}
+
+/* Buttons: hover + press */
+.cta {
+  transition: transform 140ms ease, box-shadow 180ms ease, filter 180ms ease;
+}
+.cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.22);
+  filter: brightness(1.05);
+}
+.cta:active {
+  transform: translateY(0px) scale(0.99);
+}
+
+/* Shape: smoother + little “pop” */
+.shape {
+  transition: border-radius 240ms ease, transform 140ms ease, filter 200ms ease;
+}
+.shape:hover {
+  filter: brightness(1.06);
+}
+.shape.pop {
+  transform: scale(1.06);
+}
+
+/* OPTIONAL SLICK */
+.landing-body::before {
+  content: "";
+  position: fixed;
+  inset: -200px;
+  background: radial-gradient(circle at 20% 10%, rgba(37,99,235,0.25), transparent 45%),
+              radial-gradient(circle at 80% 20%, rgba(34,197,94,0.20), transparent 45%),
+              radial-gradient(circle at 50% 90%, rgba(255,255,255,0.10), transparent 55%);
+  filter: blur(18px);
+  pointer-events: none;
+  animation: glow 8s ease-in-out infinite alternate;
+}
+@keyframes glow {
+  from { transform: translateY(0); opacity: 0.85; }
+  to   { transform: translateY(18px); opacity: 1; }
+}
