@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Pathway Finder</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="landing-body">
+  <main class="landing">
+    <header class="brand">
+      <img class="logo" src="{{ url_for('static', filename='afroed-logo.png') }}" alt="AfroED logo">
+      <div>
+        <h1>AfroED Pathway Finder</h1>
+        <p class="tagline">Pick 3 subjects. Get career pathways.</p>
+      </div>
+    </header>
+
+    <section class="hero">
+      <p class="hero-text">Choose three subjects you enjoy. We’ll suggest realistic career pathways and typical education routes.</p>
+
+      <form id="pathwayForm" class="cta-row" style="align-items:center;">
+        <select id="s1" required>
+          {% for s in subjects %}<option value="{{ s }}">{{ s }}</option>{% endfor %}
+        </select>
+        <select id="s2" required>
+          {% for s in subjects %}<option value="{{ s }}">{{ s }}</option>{% endfor %}
+        </select>
+        <select id="s3" required>
+          {% for s in subjects %}<option value="{{ s }}">{{ s }}</option>{% endfor %}
+        </select>
+
+        <button type="submit" class="cta" style="border:0;">Suggest pathways</button>
+      </form>
+
+      <p id="status" style="margin-top:14px; color: rgba(229,231,235,0.85);"></p>
+    </section>
+
+    <section id="results" class="learn" style="display:none;">
+      <h2>Suggested pathways</h2>
+      <div id="cards"></div>
+    </section>
+  </main>
+
+  <script src="{{ url_for('static', filename='pathways.js') }}"></script>
+</body>
+</html>
