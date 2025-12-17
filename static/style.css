@@ -235,19 +235,3 @@ button {
   transform: scale(1.06);
 }
 
-/* OPTIONAL SLICK */
-.landing-body::before {
-  content: "";
-  position: fixed;
-  inset: -200px;
-  background: radial-gradient(circle at 20% 10%, rgba(37,99,235,0.25), transparent 45%),
-              radial-gradient(circle at 80% 20%, rgba(34,197,94,0.20), transparent 45%),
-              radial-gradient(circle at 50% 90%, rgba(255,255,255,0.10), transparent 55%);
-  filter: blur(18px);
-  pointer-events: none;
-  animation: glow 8s ease-in-out infinite alternate;
-}
-@keyframes glow {
-  from { transform: translateY(0); opacity: 0.85; }
-  to   { transform: translateY(18px); opacity: 1; }
-}
