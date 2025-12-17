@@ -12,7 +12,7 @@ def index():
         "landing.html",
         year=datetime.now().year
     )
-    
+
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
     if request.method == "GET":
@@ -37,10 +37,6 @@ def signup():
 
     # later: redirect to login or dashboard
     return "Signup successful for: " + email
-
-@app.route("/")
-def index():
-    return redirect("/signup")
 
 if __name__ == "__main__":
     app.run(debug=True)
