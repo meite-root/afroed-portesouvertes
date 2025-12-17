@@ -5,6 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>AfroED</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+/>
+
 </head>
 <body class="landing-body">
   <main class="landing">
@@ -25,12 +30,12 @@
         <a class="cta" href="/signup">Create an account</a>
         <a class="cta secondary" href="#learn">Learn more</a>
       </div>
+    </section>
 
-      <div class="play">
-        <p class="play-label">Click the shape 👇</p>
-        <button id="shape" class="shape" aria-label="Toggle shape"></button>
-        <p id="shapeHint" class="play-hint">Square today. Circle tomorrow.</p>
-      </div>
+    <section class="map-card">
+      <h2>Explore pathways</h2>
+        <p class="map-sub">A visual map of programs, schools, and opportunities — starting simple, scaling fast.</p>
+      <div id="map" class="map"></div>
     </section>
 
     <section id="learn" class="learn">
@@ -46,7 +51,7 @@
       <span>© {{ year }} AfroED</span>
     </footer>
   </main>
-
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="{{ url_for('static', filename='landing.js') }}"></script>
 </body>
 </html>

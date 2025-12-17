@@ -1,29 +1,19 @@
-const shape = document.getElementById("shape");
-const hint = document.getElementById("shapeHint");
+// AfroED landing map (Leaflet + OpenStreetMap)
 
-shape.addEventListener("click", () => {
-  shape.classList.toggle("circle");
+// Initialize map (centered roughly on West Africa; adjust as you like)
+const map = L.map("map", { scrollWheelZoom: false }).setView([7.54, -5.55], 6);
 
-  if (shape.classList.contains("circle")) {
-    hint.textContent = "Now it’s a circle. Smooth.";
-  } else {
-    hint.textContent = "Back to square one. Literally.";
-  }
-});
+// OpenStreetMap tiles
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  maxZoom: 18,
+  attribution: '&copy; OpenStreetMap contributors'
+}).addTo(map);
 
-// Animations
+// Example marker (placeholder)
+L.marker([5.35, -4.01]).addTo(map)
+  .bindPopup("<b>Abidjan</b><br>AfroED seed location (example).");
 
-const shape = document.getElementById("shape");
-const hint = document.getElementById("shapeHint");
-
-shape.addEventListener("click", () => {
-  shape.classList.toggle("circle");
-
-  // quick pop animation
-  shape.classList.add("pop");
-  setTimeout(() => shape.classList.remove("pop"), 140);
-
-  hint.textContent = shape.classList.contains("circle")
-    ? "Now it’s a circle. Smooth."
-    : "Back to square one. Literally.";
+// Optional: enable scroll zoom only after user clicks map (nice UX)
+map.on("click", () => {
+  map.scrollWheelZoom.enable();
 });
