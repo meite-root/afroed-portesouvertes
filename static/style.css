@@ -36,12 +36,14 @@ a {
   background: white;
   border-radius: 10px;
   box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  text-align: center;
 }
 
 label {
   display: block;
   margin-top: 12px;
   font-weight: 500;
+  text-align: left;
 }
 
 input {
@@ -68,9 +70,54 @@ button:hover {
   filter: brightness(1.05);
 }
 
+.primary-btn {
+  background: #16a34a;
+}
+
+.primary-btn:hover {
+  filter: brightness(1.05);
+}
+
 .error {
   color: #b91c1c;
   margin-bottom: 8px;
+}
+
+.hidden {
+  display: none;
+}
+
+.otp-panel {
+  margin-top: 24px;
+  text-align: center;
+}
+
+.otp-message {
+  color: #4b5563;
+  margin-bottom: 14px;
+}
+
+.otp-subtext {
+  color: #6b7280;
+  margin-top: 8px;
+}
+
+.otp-inputs {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+  margin: 18px 0;
+}
+
+.otp-digit {
+  text-align: center;
+  font-size: 18px;
+  padding: 10px 0;
+}
+
+.helper-text {
+  margin-top: 12px;
+  color: #047857;
 }
 
 /* ======================================================
