@@ -3,22 +3,12 @@ import json
 from flask import Flask, render_template, request, redirect, jsonify
 from datetime import datetime
 from openai import OpenAI
-import secrets
 
 app = Flask(__name__)
 client = OpenAI()
 
 # For now, just store "users" in memory (later: DB)
 users = []
-pending_verifications = {}
-
-COUNTRIES = [
-    {"name": "Cote d’Ivoire", "code": "+225"},
-    {"name": "Ghana", "code": "+233"},
-    {"name": "Senegal", "code": "+221"},
-    {"name": "Nigeria", "code": "+234"},
-    {"name": "Benin", "code": "+229"},
-]
 
 @app.route("/")
 def index():
@@ -30,74 +20,27 @@ def index():
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
     if request.method == "GET":
-        return render_template("signup.html", countries=COUNTRIES, step="enter_phone")
+        return render_template("signup.html")
 
     # POST: user submitted form
-    step = request.form.get("step", "enter_phone")
-    country = request.form.get("country", "").strip()
-    phone = request.form.get("phone", "").strip()
-    phone_clean = phone.replace(" ", "")
+    email = request.form.get("email", "").strip().lower()
+    password = request.form.get("password", "")
 
-    if step == "enter_phone":
-        if not country or not phone:
-            return render_template(
-                "signup.html",
-                countries=COUNTRIES,
-                step="enter_phone",
-                error="Country and phone number are required.",
-            )
+    # super basic validation
+    if not email or not password:
+        return render_template("signup.html", error="Email and password are required.")
 
-        if not phone_clean.isdigit():
-            return render_template(
-                "signup.html",
-                countries=COUNTRIES,
-                step="enter_phone",
-                error="Please enter digits only for your phone number.",
-            )
+    # check if email already used
+    if any(u["email"] == email for u in users):
+        return render_template("signup.html", error="This email is already registered.")
 
-        if any(u["phone"] == phone_clean and u["country"] == country for u in users):
-            return render_template(
-                "signup.html",
-                countries=COUNTRIES,
-                step="enter_phone",
-                error="This phone number is already registered.",
-            )
+    # TODO: hash password before storing (for now, keep it simple)
+    users.append({"email": email, "password": password})
 
-        code = str(secrets.randbelow(100000)).zfill(5)
-        pending_verifications[(country, phone_clean)] = code
-
-        return render_template(
-            "signup.html",
-            countries=COUNTRIES,
-            step="verify",
-            country=country,
-            phone=phone,
-        )
-
-    verification_code = request.form.get("verification_code", "").strip()
-    stored_code = pending_verifications.get((country, phone_clean))
-
-    if not stored_code or verification_code != stored_code:
-        return render_template(
-            "signup.html",
-            countries=COUNTRIES,
-            step="verify",
-            country=country,
-            phone=phone,
-            error="The verification code is invalid. Please try again.",
-        )
-
-    users.append({"country": country, "phone": phone_clean})
-    pending_verifications.pop((country, phone_clean), None)
     print("Current users:", users)  # just to see it working in the console
 
-    return render_template(
-        "signup.html",
-        countries=COUNTRIES,
-        step="success",
-        country=country,
-        phone=phone,
-    )
+    # later: redirect to login or dashboard
+    return "Signup successful for: " + email
 
 if __name__ == "__main__":
     app.run(debug=True)
