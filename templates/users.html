@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AfroED Users Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  </head>
+  <body class="dashboard-body">
+    <div class="dashboard">
+      <header class="dashboard-header">
+        <div>
+          <p class="dashboard-kicker">AfroED Community</p>
+          <h1>Signup Sparkboard ✨</h1>
+          <p class="dashboard-subtitle">
+            Celebrate the newest learners joining the AfroED universe.
+          </p>
+        </div>
+        <div class="dashboard-meta">
+          <span>Updated {{ updated_at }}</span>
+          <span>© {{ year }} AfroED</span>
+        </div>
+      </header>
+
+      <section class="dashboard-stats">
+        <div class="stat-card">
+          <h3>Total Signups</h3>
+          <p class="stat-value">{{ total_users }}</p>
+          <p class="stat-sub">Growing every day 🎉</p>
+        </div>
+        <div class="stat-card">
+          <h3>Newest Spark</h3>
+          <p class="stat-value">{{ newest }}</p>
+          <p class="stat-sub">Latest verified member</p>
+        </div>
+        <div class="stat-card">
+          <h3>Community Mood</h3>
+          <p class="stat-value">Sunny</p>
+          <p class="stat-sub">100% vibes &amp; momentum ☀️</p>
+        </div>
+      </section>
+
+      <section class="dashboard-grid">
+        {% if users %}
+          {% for user in users %}
+            <article class="user-card">
+              <div class="user-avatar">{{ user.initials }}</div>
+              <div class="user-info">
+                <h2>{{ user.name }}</h2>
+                <p>{{ user.phone }}</p>
+                <span>Verified {{ user.verified_display }}</span>
+              </div>
+            </article>
+          {% endfor %}
+        {% else %}
+          <div class="empty-state">
+            <h2>No signups yet</h2>
+            <p>Once learners verify, they will pop up here with confetti energy.</p>
+          </div>
+        {% endif %}
+      </section>
+    </div>
+  </body>
+</html>
