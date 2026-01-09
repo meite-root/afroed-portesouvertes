@@ -57,6 +57,41 @@ def upsert_user(name, phone):
         )
 
 
+def fetch_users():
+    with sqlite3.connect(DB_PATH) as conn:
+        conn.row_factory = sqlite3.Row
+        rows = conn.execute(
+            """
+            SELECT name, phone, verified_at
+            FROM users
+            ORDER BY verified_at DESC
+            """
+        ).fetchall()
+
+    users = []
+    for row in rows:
+        verified_at = row["verified_at"]
+        try:
+            verified_dt = datetime.fromisoformat(verified_at)
+            verified_display = verified_dt.strftime("%b %d, %Y · %H:%M UTC")
+        except ValueError:
+            verified_display = verified_at
+
+        name = row["name"]
+        initials = "".join([part[0].upper() for part in name.split()[:2]]) or "AE"
+        users.append(
+            {
+                "name": name,
+                "phone": row["phone"],
+                "verified_at": verified_at,
+                "verified_display": verified_display,
+                "initials": initials,
+            }
+        )
+
+    return users
+
+
 init_db()
 
 @app.route("/")
@@ -71,6 +106,21 @@ def signup():
     if request.method == "POST":
         return jsonify({"error": "Use the OTP endpoints for signup."}), 405
     return render_template("signup.html")
+
+
+@app.route("/users")
+def users_dashboard():
+    users = fetch_users()
+    total_users = len(users)
+    newest = users[0]["verified_display"] if users else "No signups yet"
+    return render_template(
+        "users.html",
+        users=users,
+        total_users=total_users,
+        newest=newest,
+        year=datetime.now().year,
+        updated_at=datetime.utcnow().strftime("%b %d, %Y · %H:%M UTC"),
+    )
 
 
 @app.route("/api/signup/send-otp", methods=["POST"])
