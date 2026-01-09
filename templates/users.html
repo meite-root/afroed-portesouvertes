@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AfroED Users</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <main class="users-dashboard">
+    <header class="users-header">
+      <h1>AfroED Signup Dashboard</h1>
+      <p>Freshly verified learners, straight from the OTP flow. 🎉</p>
+    </header>
+
+    {% if users %}
+      <div class="users-grid">
+        {% for user in users %}
+          <article class="user-card">
+            <h2>{{ user.name }}</h2>
+            <p class="user-phone">{{ user.phone }}</p>
+            <p class="user-meta">Verified {{ user.verified_at }}</p>
+          </article>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="users-empty">
+        <h2>No signups yet</h2>
+        <p>Once someone verifies their number, they’ll show up here.</p>
+      </div>
+    {% endif %}
+  </main>
+</body>
+</html>

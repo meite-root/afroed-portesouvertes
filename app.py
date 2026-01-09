@@ -1,14 +1,71 @@
 import os
 import json
-from flask import Flask, render_template, request, redirect, jsonify
+import sqlite3
+from flask import Flask, render_template, request, jsonify
 from datetime import datetime
 from openai import OpenAI
+from twilio.rest import Client
 
 app = Flask(__name__)
 client = OpenAI()
 
-# For now, just store "users" in memory (later: DB)
-users = []
+DB_PATH = os.path.join(os.path.dirname(__file__), "afroed.db")
+pending_signups = {}
+
+
+def init_db():
+    with sqlite3.connect(DB_PATH) as conn:
+        conn.execute(
+            """
+            CREATE TABLE IF NOT EXISTS users (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT NOT NULL,
+                phone TEXT NOT NULL UNIQUE,
+                verified_at TEXT NOT NULL
+            )
+            """
+        )
+
+
+def get_twilio_client():
+    account_sid = os.environ.get("TWILIO_ACCOUNT_SID")
+    auth_token = os.environ.get("TWILIO_AUTH_TOKEN")
+    if not account_sid or not auth_token:
+        raise ValueError("Missing Twilio credentials.")
+    return Client(account_sid, auth_token)
+
+
+def get_verify_service_sid():
+    service_sid = os.environ.get("TWILIO_VERIFY_SERVICE_SID")
+    if not service_sid:
+        raise ValueError("Missing Twilio Verify service SID.")
+    return service_sid
+
+
+def upsert_user(name, phone):
+    verified_at = datetime.utcnow().isoformat()
+    with sqlite3.connect(DB_PATH) as conn:
+        conn.execute(
+            """
+            INSERT INTO users (name, phone, verified_at)
+            VALUES (?, ?, ?)
+            ON CONFLICT(phone) DO UPDATE SET
+                name = excluded.name,
+                verified_at = excluded.verified_at
+            """,
+            (name, phone, verified_at),
+        )
+
+
+init_db()
+
+def fetch_users():
+    with sqlite3.connect(DB_PATH) as conn:
+        conn.row_factory = sqlite3.Row
+        rows = conn.execute(
+            "SELECT id, name, phone, verified_at FROM users ORDER BY id DESC"
+        ).fetchall()
+    return [dict(row) for row in rows]
 
 @app.route("/")
 def index():
@@ -19,28 +76,62 @@ def index():
 
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
-    if request.method == "GET":
-        return render_template("signup.html")
+    if request.method == "POST":
+        return jsonify({"error": "Use the OTP endpoints for signup."}), 405
+    return render_template("signup.html")
 
-    # POST: user submitted form
-    email = request.form.get("email", "").strip().lower()
-    password = request.form.get("password", "")
 
-    # super basic validation
-    if not email or not password:
-        return render_template("signup.html", error="Email and password are required.")
+@app.route("/users")
+def users_dashboard():
+    return render_template("users.html", users=fetch_users())
 
-    # check if email already used
-    if any(u["email"] == email for u in users):
-        return render_template("signup.html", error="This email is already registered.")
 
-    # TODO: hash password before storing (for now, keep it simple)
-    users.append({"email": email, "password": password})
+@app.route("/api/signup/send-otp", methods=["POST"])
+def send_otp():
+    data = request.get_json(force=True, silent=True) or {}
+    name = str(data.get("name", "")).strip()
+    phone = str(data.get("phone", "")).strip()
 
-    print("Current users:", users)  # just to see it working in the console
+    if not name or not phone:
+        return jsonify({"error": "Name and phone are required."}), 400
 
-    # later: redirect to login or dashboard
-    return "Signup successful for: " + email
+    try:
+        client = get_twilio_client()
+        service_sid = get_verify_service_sid()
+        client.verify.v2.services(service_sid).verifications.create(
+            to=phone,
+            channel="sms",
+        )
+        pending_signups[phone] = name
+        return jsonify({"status": "sent"})
+    except Exception as exc:
+        return jsonify({"error": str(exc)}), 500
+
+
+@app.route("/api/signup/verify-otp", methods=["POST"])
+def verify_otp():
+    data = request.get_json(force=True, silent=True) or {}
+    phone = str(data.get("phone", "")).strip()
+    code = str(data.get("code", "")).strip()
+
+    if not phone or not code:
+        return jsonify({"error": "Phone and code are required."}), 400
+
+    try:
+        client = get_twilio_client()
+        service_sid = get_verify_service_sid()
+        verification = client.verify.v2.services(service_sid).verification_checks.create(
+            to=phone,
+            code=code,
+        )
+        if verification.status != "approved":
+            return jsonify({"error": "Invalid verification code."}), 400
+
+        name = pending_signups.pop(phone, "AfroED User")
+        upsert_user(name, phone)
+        return jsonify({"status": "verified"})
+    except Exception as exc:
+        return jsonify({"error": str(exc)}), 500
 
 if __name__ == "__main__":
     app.run(debug=True)

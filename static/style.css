@@ -36,12 +36,14 @@ a {
   background: white;
   border-radius: 10px;
   box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  text-align: center;
 }
 
 label {
   display: block;
   margin-top: 12px;
   font-weight: 500;
+  text-align: left;
 }
 
 input {
@@ -68,9 +70,111 @@ button:hover {
   filter: brightness(1.05);
 }
 
+.primary-btn {
+  background: #16a34a;
+}
+
+.primary-btn:hover {
+  filter: brightness(1.05);
+}
+
 .error {
   color: #b91c1c;
   margin-bottom: 8px;
+}
+
+.hidden {
+  display: none;
+}
+
+.otp-panel {
+  margin-top: 24px;
+  text-align: center;
+}
+
+.otp-message {
+  color: #4b5563;
+  margin-bottom: 14px;
+}
+
+.otp-subtext {
+  color: #6b7280;
+  margin-top: 8px;
+}
+
+.otp-inputs {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+  margin: 18px 0;
+}
+
+.otp-digit {
+  text-align: center;
+  font-size: 18px;
+  padding: 10px 0;
+}
+
+.helper-text {
+  margin-top: 12px;
+  color: #047857;
+}
+
+/* ======================================================
+   Users dashboard
+====================================================== */
+
+.users-dashboard {
+  max-width: 960px;
+  margin: 40px auto;
+  padding: 0 20px 40px;
+}
+
+.users-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.users-header h1 {
+  margin-bottom: 8px;
+}
+
+.users-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.user-card {
+  background: white;
+  border-radius: 14px;
+  padding: 18px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  border: 1px solid #e5e7eb;
+}
+
+.user-card h2 {
+  margin: 0 0 6px;
+  font-size: 18px;
+}
+
+.user-phone {
+  font-weight: 600;
+  margin: 0 0 8px;
+}
+
+.user-meta {
+  color: #6b7280;
+  font-size: 13px;
+  margin: 0;
+}
+
+.users-empty {
+  background: white;
+  border-radius: 14px;
+  padding: 24px;
+  text-align: center;
+  border: 1px dashed #d1d5db;
 }
 
 /* ======================================================
