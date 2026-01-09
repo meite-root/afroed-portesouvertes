@@ -1,106 +1,27 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Je m’inscris</title>
+  <title>Sign up</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-<body class="signup-body">
-  <div class="signup-shell">
-    <div class="signup-card">
-      <div class="signup-pill">Je m’inscris!</div>
+<body>
+  <div class="signup-container">
+    <h1>Create your account</h1>
 
-      {% if error %}
-        <p class="signup-error">{{ error }}</p>
-      {% endif %}
+    {% if error %}
+      <p class="error">{{ error }}</p>
+    {% endif %}
 
-      {% if step == "success" %}
-        <div class="signup-success">
-          <h2>Inscription confirmée</h2>
-          <p>Votre numéro {{ phone }} a bien été validé. Bienvenue !</p>
-        </div>
-      {% else %}
-        <form method="POST" action="/signup" class="signup-form">
-          <label for="country" class="signup-label">Pays</label>
-          <div class="signup-select">
-            <select id="country" name="country" required>
-              <option value="" disabled {% if not country %}selected{% endif %}>Sélectionnez un pays</option>
-              {% for item in countries %}
-                <option value="{{ item.code }}" {% if country == item.code %}selected{% endif %}>
-                  {{ item.name }} ({{ item.code }})
-                </option>
-              {% endfor %}
-            </select>
-            <span class="select-caret">▾</span>
-          </div>
+    <form method="POST" action="/signup">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required>
 
-          <label for="phone" class="signup-label">Mon numéro</label>
-          <div class="phone-row">
-            <input
-              type="text"
-              id="phone"
-              name="phone"
-              inputmode="numeric"
-              placeholder="{{ country or '+225' }}"
-              value="{{ phone or '' }}"
-              required
-            >
-            <button type="submit" class="submit-btn">
-              <span class="submit-icon">✓</span>
-              Submit
-            </button>
-          </div>
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" required minlength="6">
 
-          <input type="hidden" name="step" value="{{ step or 'enter_phone' }}">
-
-          {% if step == "verify" %}
-            <div class="verify-message">
-              <div class="verify-icon">⟳</div>
-              <p>Merci d’avoir renseigné un numéro valide. Veuillez maintenant confirmer qu’il vous appartient…</p>
-            </div>
-
-            <div class="verify-card">
-              <h2>Le code de verification vous a été envoyé</h2>
-              <p>Veuillez consulter votre boite SMS et inscrire le code reçu. Vous y êtes presque!</p>
-
-              <label class="signup-label">Entrez le code de confirmation:</label>
-              <div class="code-inputs" data-code-inputs>
-                {% for _ in range(5) %}
-                  <input type="text" inputmode="numeric" maxlength="1" class="code-box" required>
-                {% endfor %}
-              </div>
-              <input type="hidden" name="verification_code" id="verification_code">
-            </div>
-          {% endif %}
-        </form>
-      {% endif %}
-    </div>
+      <button type="submit">Sign up</button>
+    </form>
   </div>
-
-  <script>
-    const codeInputs = document.querySelectorAll('[data-code-inputs] .code-box');
-    const codeField = document.getElementById('verification_code');
-    if (codeInputs.length) {
-      codeInputs[0].focus();
-      const updateCode = () => {
-        codeField.value = Array.from(codeInputs).map((input) => input.value).join('');
-      };
-      codeInputs.forEach((input, index) => {
-        input.addEventListener('input', (event) => {
-          const value = event.target.value.replace(/\D/g, '');
-          event.target.value = value;
-          if (value && codeInputs[index + 1]) {
-            codeInputs[index + 1].focus();
-          }
-          updateCode();
-        });
-        input.addEventListener('keydown', (event) => {
-          if (event.key === 'Backspace' && !event.target.value && codeInputs[index - 1]) {
-            codeInputs[index - 1].focus();
-          }
-        });
-      });
-    }
-  </script>
 </body>
 </html>
