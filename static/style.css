@@ -205,18 +205,22 @@ button:hover {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 12px 20px;
+  width: 100%;
+  max-width: 280px;
+  padding: clamp(10px, 2.5vw, 14px) clamp(16px, 4vw, 24px);
   border-radius: 999px;
   border: 1px solid #111827;
-  background: white;
+  background: #111827;
+  color: #ffffff;
   font-weight: 600;
+  font-size: clamp(14px, 2.8vw, 16px);
   cursor: pointer;
   transition: transform 150ms ease, box-shadow 150ms ease;
 }
 
 .cta.primary {
   border-color: #111827;
-  background: #f8f8f8;
+  background: #111827;
 }
 
 .cta:hover {
@@ -260,11 +264,22 @@ button:hover {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 10px 20px;
+  width: 100%;
+  max-width: 240px;
+  padding: clamp(8px, 2.4vw, 12px) clamp(14px, 3.5vw, 20px);
   border-radius: 999px;
-  border: 1px solid #e5e7eb;
-  background: white;
+  border: 1px solid #111827;
+  background: #111827;
+  color: #ffffff;
   font-weight: 600;
+  font-size: clamp(13px, 2.6vw, 15px);
+}
+
+@media (min-width: 640px) {
+  .cta,
+  .pill-button {
+    width: auto;
+  }
 }
 
 .phone-mock {
