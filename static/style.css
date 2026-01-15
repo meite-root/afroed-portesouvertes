@@ -225,23 +225,11 @@ button:hover {
 }
 
 .hero-art {
-  display: grid;
-  place-items: center;
-}
-
-.hero-map {
-  width: 220px;
-  height: 190px;
-  border-radius: 24px;
-  background: repeating-linear-gradient(
-      45deg,
-      #d97706,
-      #d97706 10px,
-      #111827 10px,
-      #111827 20px
-    );
-  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cpath d='M67 18l22-7 25 9 21-2 26 16 3 27-13 10 9 24-7 35-27 20-21 8-23-7-22 5-11-11-4-23 9-18-4-22 9-20-5-16z'/%3E%3C/svg%3E")
-    center / contain no-repeat;
+  display: block;
+  width: 100%;
+  max-width: 320px;
+  height: auto;
+  justify-self: center;
 }
 
 /* ======================================================
