@@ -5,55 +5,188 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>AfroED</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-  <link
-  rel="stylesheet"
-  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-/>
-
 </head>
 <body class="landing-body">
   <main class="landing">
-    <header class="brand">
-      <img class="logo" src="{{ url_for('static', filename='afroed-logo.svg') }}" alt="AfroED logo">
-      <div>
-        <h1>AfroED</h1>
-        <p class="tagline">Opportunities, organized. Education, unlocked.</p>
+    <header class="landing-header">
+      <div class="brand">
+        <img class="logo" src="{{ url_for('static', filename='afroed-logo.svg') }}" alt="AfroED logo">
+        <span>AfroEd</span>
       </div>
+      <button class="nav-toggle" type="button" aria-label="Open menu">≡</button>
     </header>
 
     <section class="hero">
-      <p class="hero-text">
-        A clean database of educational opportunities — built for clarity, access, and momentum.
-      </p>
-
-
-      <div class="cta-row">
-        <a class="cta" href="/pathways">Explore career pathways</a>
-        <a class="cta secondary" href="/signup">Create an account</a>
+      <div class="hero-text">
+        <h1>Orientez-vous mieux.</h1>
+        <p>
+          Les opportunités éducatives ne manquent pas. Mais Hélas, vous les
+          manquez souvent, et voilà pourquoi nous avons conçu AfroEd.
+          Dorénavant, restez à l’affût de l’info!
+        </p>
+        <button class="cta primary" type="button" data-open-signup>Je m'inscris!</button>
       </div>
-
+      <div class="hero-art">
+        <div class="hero-map" aria-hidden="true"></div>
+      </div>
     </section>
 
-    <section class="map-card">
-      <h2>Explore pathways</h2>
-        <p class="map-sub">A visual map of programs, schools, and opportunities — starting simple, scaling fast.</p>
-      <div id="map" class="map"></div>
+    <section class="info-card">
+      <div>
+        <h2>L’info éducative en tas.</h2>
+        <p>
+          Recevez gratuitement par whatsapp des notifications & rappels personnalisés
+          quant aux meilleures opportunités éducatives du moment.
+        </p>
+        <button class="pill-button" type="button">Bourses</button>
+      </div>
+      <img class="phone-mock" src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=500&q=80" alt="Preview of AfroEd notifications">
     </section>
 
-    <section id="learn" class="learn">
-      <h2>What AfroED will do</h2>
-      <ul>
-        <li>Search scholarships, programs, and schools in one place</li>
-        <li>Community discussions and verified announcements</li>
-        <li>Partners, ambassadors, and local insights</li>
-      </ul>
+    <section class="features">
+      <div class="feature">
+        <div class="feature-icon">i</div>
+        <div>
+          <h3>Inscris-toi</h3>
+          <p>Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint.</p>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">✉</div>
+        <div>
+          <h3>Recois des infos sur-mesure</h3>
+          <p>Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint.</p>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">★</div>
+        <div>
+          <h3>Postule</h3>
+          <p>Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="mentors">
+      <h2>Nos mentors</h2>
+      <div class="mentor-logo">STARTAD</div>
+      <p>Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint.</p>
+      <div class="carousel" aria-label="Mentors">
+        <article class="carousel-card">
+          <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80" alt="Jenny Wilson">
+          <h3>Jenny Wilson</h3>
+          <span>@Oxford University</span>
+          <p>“minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.”</p>
+        </article>
+        <article class="carousel-card">
+          <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=400&q=80" alt="Savannah Nguyen">
+          <h3>Savannah Nguyen</h3>
+          <span>@NYU</span>
+          <p>“minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.”</p>
+        </article>
+        <article class="carousel-card">
+          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=400&q=80" alt="Theresa Webb">
+          <h3>Theresa Webb</h3>
+          <span>@UC Berkeley</span>
+          <p>“minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.”</p>
+        </article>
+        <article class="carousel-card">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80" alt="Jacob Jones">
+          <h3>Jacob Jones</h3>
+          <span>@Goethe Institut</span>
+          <p>“minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.”</p>
+        </article>
+        <article class="carousel-card">
+          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=400&q=80" alt="Arlene McCoy">
+          <h3>Arlene McCoy</h3>
+          <span>@McKinsey Senegal</span>
+          <p>“minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.”</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="supporters">
+      <h2>Soutenus par chaleureux network d’individues</h2>
+      <div class="supporter-grid">
+        <article class="support-card">
+          <img src="https://images.unsplash.com/photo-1506795642430-0ce9e06fbb24?auto=format&fit=crop&w=600&q=80" alt="Jenny Wilson outdoors">
+          <div class="support-card-content">
+            <h3>Jenny Wilson</h3>
+            <span>@Oxford University</span>
+            <p>Minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.</p>
+          </div>
+        </article>
+        <article class="support-card">
+          <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80" alt="Savannah Nguyen smiling">
+          <div class="support-card-content">
+            <h3>Savannah Nguyen</h3>
+            <span>@NYU</span>
+            <p>Minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.</p>
+          </div>
+        </article>
+      </div>
     </section>
 
     <footer class="footer">
-      <span>© {{ year }} AfroED</span>
+      <nav class="footer-nav">
+        <a href="#">Accueil</a>
+        <a href="#">À propos</a>
+        <a href="#">Nous contacter</a>
+      </nav>
+      <div class="footer-social">
+        <span>f</span>
+        <span>in</span>
+        <span>ig</span>
+      </div>
+      <span>© {{ year }} AfroEd. All rights reserved.</span>
     </footer>
   </main>
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <div class="modal" id="signup-modal" aria-hidden="true">
+    <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="signup-title">
+      <button class="modal-close" type="button" aria-label="Fermer" data-close-signup>✕</button>
+      <h2 id="signup-title">Je m’inscris!</h2>
+      <p>Rejoignez AfroEd pour recevoir les meilleures opportunités éducatives.</p>
+      <form id="signup-form">
+        <label for="name">Nom complet</label>
+        <input type="text" id="name" name="name" required placeholder="Votre nom">
+
+        <label for="country">Pays</label>
+        <select id="country" name="country">
+          <option value="ci">Côte d’Ivoire</option>
+          <option value="sn">Sénégal</option>
+          <option value="cm">Cameroun</option>
+          <option value="ng">Nigeria</option>
+        </select>
+
+        <label for="phone">Mon numéro</label>
+        <input type="tel" id="phone" name="phone" required placeholder="+225 03 26 60 82">
+
+        <div class="modal-actions">
+          <button type="submit" class="primary-btn">Submit</button>
+        </div>
+      </form>
+
+      <div id="otp-panel" class="otp-panel hidden">
+        <p class="otp-message">
+          Merci d’avoir renseigné un numéro valide. Veuillez maintenant confirmer qu’il vous appartient...
+        </p>
+        <h2>Le code de verification vous a été envoyé</h2>
+        <p class="otp-subtext">Veuillez consulter votre boite SMS et inscrire le code reçu.</p>
+        <div class="otp-inputs">
+          <input type="text" inputmode="numeric" maxlength="1" class="otp-digit">
+          <input type="text" inputmode="numeric" maxlength="1" class="otp-digit">
+          <input type="text" inputmode="numeric" maxlength="1" class="otp-digit">
+          <input type="text" inputmode="numeric" maxlength="1" class="otp-digit">
+          <input type="text" inputmode="numeric" maxlength="1" class="otp-digit">
+          <input type="text" inputmode="numeric" maxlength="1" class="otp-digit">
+        </div>
+        <button type="button" id="verify-btn" class="primary-btn">Verify</button>
+        <p id="otp-status" class="helper-text"></p>
+      </div>
+    </div>
+  </div>
   <script src="{{ url_for('static', filename='landing.js') }}"></script>
+  <script src="{{ url_for('static', filename='signup.js') }}"></script>
 </body>
 </html>
