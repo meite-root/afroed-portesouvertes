@@ -1,19 +1,45 @@
-// AfroED landing map (Leaflet + OpenStreetMap)
+const modal = document.getElementById("signup-modal");
+const openButtons = document.querySelectorAll("[data-open-signup]");
+const closeButtons = document.querySelectorAll("[data-close-signup]");
+const otpPanel = document.getElementById("otp-panel");
+const otpStatus = document.getElementById("otp-status");
+const form = document.getElementById("signup-form");
 
-// Initialize map (centered roughly on West Africa; adjust as you like)
-const map = L.map("map", { scrollWheelZoom: false }).setView([7.54, -5.55], 6);
+const openModal = () => {
+  modal.classList.add("active");
+  modal.setAttribute("aria-hidden", "false");
+};
 
-// OpenStreetMap tiles
-L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-  maxZoom: 18,
-  attribution: '&copy; OpenStreetMap contributors'
-}).addTo(map);
+const closeModal = () => {
+  modal.classList.remove("active");
+  modal.setAttribute("aria-hidden", "true");
+  if (otpPanel) {
+    otpPanel.classList.add("hidden");
+  }
+  if (otpStatus) {
+    otpStatus.textContent = "";
+  }
+  if (form) {
+    form.reset();
+  }
+};
 
-// Example marker (placeholder)
-L.marker([5.35, -4.01]).addTo(map)
-  .bindPopup("<b>Abidjan</b><br>AfroED seed location (example).");
+openButtons.forEach((button) => {
+  button.addEventListener("click", openModal);
+});
 
-// Optional: enable scroll zoom only after user clicks map (nice UX)
-map.on("click", () => {
-  map.scrollWheelZoom.enable();
+closeButtons.forEach((button) => {
+  button.addEventListener("click", closeModal);
+});
+
+modal.addEventListener("click", (event) => {
+  if (event.target === modal) {
+    closeModal();
+  }
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && modal.classList.contains("active")) {
+    closeModal();
+  }
 });
