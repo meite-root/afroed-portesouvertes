@@ -139,6 +139,70 @@ button:hover {
 }
 
 /* ======================================================
+   Pathways layout helpers
+====================================================== */
+
+.pathways-header {
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.pathways-header .logo {
+  width: 96px;
+  height: 96px;
+}
+
+.pathways-pill {
+  width: auto;
+  padding-inline: 24px;
+}
+
+.cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
+.cta-row select {
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid #d1d5db;
+  background: #ffffff;
+  min-width: 180px;
+  flex: 1 1 180px;
+}
+
+.cta-row .cta {
+  border: 0;
+  width: auto;
+  flex: 1 1 200px;
+}
+
+@media (max-width: 700px) {
+  .pathways-header {
+    align-items: flex-start;
+  }
+
+  .pathways-header .logo {
+    width: 72px;
+    height: 72px;
+  }
+
+  .cta-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .cta-row select,
+  .cta-row .cta {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+/* ======================================================
    Landing header
 ====================================================== */
 
@@ -323,6 +387,131 @@ button:hover {
   margin: 0;
   color: #4b5563;
   line-height: 1.5;
+}
+
+/* ======================================================
+   Events calendar
+====================================================== */
+
+.events {
+  display: grid;
+  gap: 18px;
+}
+
+.events-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+}
+
+.events-header h2 {
+  margin: 0 0 6px;
+}
+
+.events-header p {
+  margin: 0;
+  color: #4b5563;
+}
+
+.events-chip {
+  background: #111827;
+  color: #ffffff;
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.events-grid {
+  display: grid;
+  gap: 18px;
+}
+
+.calendar {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 16px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 10px 22px rgba(17, 24, 39, 0.08);
+}
+
+.calendar-weekdays,
+.calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+}
+
+.calendar-weekdays span {
+  text-transform: uppercase;
+  font-size: 11px;
+  font-weight: 600;
+  color: #6b7280;
+  text-align: center;
+}
+
+.calendar-days span {
+  background: #f9fafb;
+  border-radius: 10px;
+  padding: 10px 0;
+  font-size: 12px;
+  text-align: center;
+  font-weight: 600;
+  color: #111827;
+}
+
+.calendar-days span.muted {
+  color: #9ca3af;
+}
+
+.calendar-days span.event-day {
+  background: #111827;
+  color: #ffffff;
+}
+
+.event-list {
+  display: grid;
+  gap: 12px;
+}
+
+.event-card {
+  display: grid;
+  gap: 8px;
+  padding: 16px;
+  border-radius: 16px;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+}
+
+.event-card h3 {
+  margin: 0 0 6px;
+  font-size: 16px;
+}
+
+.event-card p {
+  margin: 0;
+  color: #4b5563;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.event-date {
+  font-size: 12px;
+  color: #6b7280;
+  margin: 0 0 4px;
+  font-weight: 600;
+}
+
+.event-tag {
+  justify-self: flex-start;
+  background: #f3f4f6;
+  color: #111827;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 999px;
 }
 
 /* ======================================================
@@ -537,6 +726,11 @@ button:hover {
 
   .info-card {
     grid-template-columns: 1.1fr 0.9fr;
+  }
+
+  .events-grid {
+    grid-template-columns: 0.9fr 1.1fr;
+    align-items: start;
   }
 
   .supporter-grid {
