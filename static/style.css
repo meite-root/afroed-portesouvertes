@@ -132,10 +132,10 @@ button:hover {
 .landing {
   max-width: 1040px;
   margin: 0 auto;
-  padding: 32px 20px 48px;
+  padding: 28px 20px 40px;
   display: flex;
   flex-direction: column;
-  gap: 36px;
+  gap: 32px;
 }
 
 /* ======================================================
@@ -157,8 +157,8 @@ button:hover {
 }
 
 .logo {
-  width: 104px;
-  height: 104px;
+  width: 136px;
+  height: 136px;
 }
 
 .nav-toggle {
@@ -181,11 +181,6 @@ button:hover {
   display: grid;
   gap: 24px;
   align-items: center;
-  padding: 24px;
-  background: #ffffff;
-  border-radius: 24px;
-  border: 1px solid #ece7e2;
-  box-shadow: 0 18px 36px rgba(17, 24, 39, 0.08);
 }
 
 .hero-text {
@@ -195,7 +190,7 @@ button:hover {
 }
 
 .hero h1 {
-  font-size: 32px;
+  font-size: 30px;
   line-height: 1.1;
   margin: 0;
 }
@@ -246,14 +241,12 @@ button:hover {
 ====================================================== */
 
 .info-card {
-  background: #ffffff;
+  background: #fdfbf8;
   border-radius: 20px;
   padding: 22px;
   display: grid;
   gap: 20px;
   align-items: center;
-  border: 1px solid #ece7e2;
-  box-shadow: 0 14px 30px rgba(17, 24, 39, 0.08);
 }
 
 .info-card h2 {
@@ -309,11 +302,6 @@ button:hover {
   display: flex;
   gap: 14px;
   align-items: flex-start;
-  padding: 16px;
-  background: #ffffff;
-  border-radius: 16px;
-  border: 1px solid #ece7e2;
-  box-shadow: 0 10px 20px rgba(17, 24, 39, 0.06);
 }
 
 .feature-icon {
@@ -344,11 +332,6 @@ button:hover {
 .mentors {
   display: grid;
   gap: 16px;
-  padding: 24px;
-  background: #ffffff;
-  border-radius: 24px;
-  border: 1px solid #ece7e2;
-  box-shadow: 0 18px 36px rgba(17, 24, 39, 0.08);
 }
 
 .mentors h2 {
@@ -554,10 +537,6 @@ button:hover {
 
   .info-card {
     grid-template-columns: 1.1fr 0.9fr;
-  }
-
-  .features {
-    grid-template-columns: repeat(3, 1fr);
   }
 
   .supporter-grid {
