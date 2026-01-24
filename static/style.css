@@ -83,6 +83,35 @@ button:hover {
   margin-bottom: 8px;
 }
 
+.privacy-block {
+  margin-top: 20px;
+  padding: 16px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  text-align: left;
+  max-height: 220px;
+  overflow-y: auto;
+  line-height: 1.5;
+  color: #374151;
+}
+
+.privacy-block h2,
+.privacy-block h3 {
+  margin: 0 0 10px;
+  font-size: 16px;
+  color: #111827;
+}
+
+.privacy-block p {
+  margin: 0 0 10px;
+  font-size: 14px;
+}
+
+.privacy-block p:last-child {
+  margin-bottom: 0;
+}
+
 .hidden {
   display: none;
 }
