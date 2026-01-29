@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Confirmation · AfroEd</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="profile-body confirmation-body">
+  <header class="profile-header">
+    <div class="brand">
+      <img class="logo" src="{{ url_for('static', filename='default-monochrome.svg') }}" alt="AfroEd" />
+      <span>AfroEd</span>
+    </div>
+    <button class="nav-toggle" type="button" aria-label="Menu">≡</button>
+  </header>
+
+  <main class="profile-container">
+    <section class="confirmation-card">
+      <h1>C’est dans la boite!</h1>
+      <p>
+        Merci de votre confiance à AfroEd. Nous vous enverrons des sms via whatsapp
+        chaque semaine avec nos suggestions d’opportunités uniques pour vous.
+        Comptez sur nous!
+      </p>
+      <p>
+        Veuillez nous contacter par whatsapp au
+        <span class="confirmation-placeholder" aria-hidden="true">__</span>
+        si vous avez des questions.
+      </p>
+      <div class="confirmation-hands" aria-hidden="true">
+        <span class="hand">🤟🏻</span>
+        <span class="hand">✊🏿</span>
+      </div>
+      <a class="primary-btn confirmation-link" href="{{ url_for('index') }}">Retour à l’accueil</a>
+    </section>
+  </main>
+
+  <footer class="profile-footer">
+    <nav>
+      <a href="{{ url_for('index') }}">Accueil</a>
+      <a href="#">A propos</a>
+      <a href="#">Nous Contacter</a>
+    </nav>
+    <div class="footer-brand">
+      <span class="footer-logo">AfroEd</span>
+      <div class="footer-icons">
+        <span>f</span>
+        <span>in</span>
+        <span>ig</span>
+      </div>
+    </div>
+    <small>© {{ year }} AfroEd. Tous droits réservés.</small>
+  </footer>
+</body>
+</html>
