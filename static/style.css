@@ -54,6 +54,24 @@ input {
   border: 1px solid #d1d5db;
 }
 
+input[type="checkbox"] {
+  width: auto;
+  margin: 0;
+}
+
+.consent-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 16px;
+  text-align: left;
+}
+
+.consent-row label {
+  margin: 0;
+  font-weight: 400;
+}
+
 button {
   margin-top: 18px;
   width: 100%;
