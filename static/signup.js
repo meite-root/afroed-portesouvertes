@@ -2,6 +2,7 @@ const form = document.getElementById("signup-form");
 const otpPanel = document.getElementById("otp-panel");
 const otpStatus = document.getElementById("otp-status");
 const verifyButton = document.getElementById("verify-btn");
+const formStatus = document.getElementById("form-status");
 const otpDigits = Array.from(document.querySelectorAll(".otp-digit"));
 
 const focusNext = (currentIndex) => {
@@ -32,13 +33,29 @@ otpDigits.forEach((input, index) => {
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
   otpStatus.textContent = "";
+  if (formStatus) {
+    formStatus.textContent = "";
+    formStatus.classList.remove("error");
+  }
 
   const name = document.getElementById("name").value.trim();
   const phone = document.getElementById("phone").value.trim();
+  const consent = document.getElementById("consent");
 
   if (!name || !phone) {
-    otpStatus.textContent = "Veuillez renseigner un nom et un numéro valide.";
-    otpStatus.classList.add("error");
+    if (formStatus) {
+      formStatus.textContent = "Veuillez renseigner un nom et un numéro valide.";
+      formStatus.classList.add("error");
+    }
+    return;
+  }
+
+  if (consent && !consent.checked) {
+    if (formStatus) {
+      formStatus.textContent = "Veuillez accepter l’accord avant de continuer.";
+      formStatus.classList.add("error");
+    }
+    consent.focus();
     return;
   }
 

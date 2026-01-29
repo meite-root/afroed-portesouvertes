@@ -20,7 +20,13 @@
       <label for="phone">Mon numéro</label>
       <input type="tel" id="phone" name="phone" required placeholder="+225 03 26 60 82">
 
+      <div class="consent-row">
+        <input type="checkbox" id="consent" name="consent" required>
+        <label for="consent">J’accepte l’accord et la politique de confidentialité.</label>
+      </div>
+
       <button type="submit" class="primary-btn">Submit</button>
+      <p id="form-status" class="helper-text" aria-live="polite"></p>
     </form>
 
     <div class="privacy-block">
