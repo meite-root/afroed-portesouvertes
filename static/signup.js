@@ -100,6 +100,7 @@ verifyButton.addEventListener("click", async () => {
     }
     otpStatus.textContent = "Votre compte est vérifié. Bienvenue !";
     otpStatus.classList.remove("error");
+    window.location.assign("/signup/profile");
   } catch (error) {
     otpStatus.textContent = error.message;
     otpStatus.classList.add("error");

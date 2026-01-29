@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Compléter mon profil · AfroEd</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="profile-body">
+  <header class="profile-header">
+    <div class="brand">
+      <img class="logo" src="{{ url_for('static', filename='default-monochrome.svg') }}" alt="AfroEd" />
+      <span>AfroEd</span>
+    </div>
+    <button class="nav-toggle" type="button" aria-label="Menu">≡</button>
+  </header>
+
+  <main class="profile-container">
+    <section class="profile-card">
+      <div class="profile-hero">
+        <div>
+          <h1>Bienvenue Parmi nous!</h1>
+          <p>Juste quelques additions pour des recommandations sur mesure!</p>
+        </div>
+        <div class="profile-emoji" aria-hidden="true">👌🏾</div>
+      </div>
+
+      <form class="profile-form">
+        <label for="first-name">Prénom</label>
+        <input id="first-name" name="first-name" type="text" placeholder="Placeholder" required />
+
+        <fieldset class="profile-fieldset">
+          <legend>Genre</legend>
+          <label class="choice">
+            <input type="radio" name="gender" value="Homme" />
+            <span>Homme</span>
+          </label>
+          <label class="choice">
+            <input type="radio" name="gender" value="Femme" />
+            <span>Femme</span>
+          </label>
+        </fieldset>
+
+        <label for="country">Pays</label>
+        <input id="country" name="country" type="text" placeholder="Placeholder" />
+
+        <label for="grad-year">En quelle année académique allez vous terminer le lycée?</label>
+        <input id="grad-year" name="grad-year" type="text" placeholder="Placeholder" />
+
+        <div class="interest-block">
+          <div class="interest-header">
+            <div>
+              <h2>Domaines d’intérêt</h2>
+              <p>Filter by category · 128 chips discovered</p>
+            </div>
+            <button class="filter-btn" type="button">Styles ▾</button>
+          </div>
+          <div class="chip-group" data-chip-group>
+            <button type="button" class="chip active">Prototyping</button>
+            <button type="button" class="chip">Sketch</button>
+            <button type="button" class="chip">Product</button>
+            <button type="button" class="chip active">Figma</button>
+            <button type="button" class="chip">UI kit</button>
+            <button type="button" class="chip">User experience</button>
+            <button type="button" class="chip">Wireframing</button>
+            <button type="button" class="chip">XD</button>
+            <button type="button" class="chip">Leadership</button>
+            <button type="button" class="chip">UI design</button>
+            <button type="button" class="chip active">ReactJS</button>
+            <button type="button" class="chip">Photoshop</button>
+          </div>
+          <button class="select-all" type="button">Select All</button>
+        </div>
+
+        <label class="consent-row">
+          <input type="checkbox" name="sms-consent" />
+          <span>J’ai pas de numéro Whatsapp et je préfère recevoir les infos par SMS.</span>
+        </label>
+
+        <button type="submit" class="primary-btn">Je confirme</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="profile-footer">
+    <nav>
+      <a href="{{ url_for('index') }}">Accueil</a>
+      <a href="#">A propos</a>
+      <a href="#">Nous Contacter</a>
+    </nav>
+    <div class="footer-brand">
+      <span class="footer-logo">AfroEd</span>
+      <div class="footer-icons">
+        <span>f</span>
+        <span>in</span>
+        <span>ig</span>
+      </div>
+    </div>
+    <small>© {{ year }} AfroEd. Tous droits réservés.</small>
+  </footer>
+
+  <script src="{{ url_for('static', filename='profile.js') }}"></script>
+</body>
+</html>

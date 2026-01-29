@@ -107,6 +107,13 @@ def signup():
         return jsonify({"error": "Use the OTP endpoints for signup."}), 405
     return render_template("signup.html")
 
+@app.route("/signup/profile")
+def signup_profile():
+    return render_template(
+        "signup_profile.html",
+        year=datetime.now().year,
+    )
+
 
 @app.route("/users")
 def users_dashboard():
