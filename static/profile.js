@@ -25,3 +25,18 @@ selectAllButtons.forEach((button) => {
     });
   });
 });
+
+const profileForm = document.querySelector(".profile-form");
+
+if (profileForm) {
+  profileForm.addEventListener("submit", (event) => {
+    if (!profileForm.checkValidity()) {
+      event.preventDefault();
+      profileForm.reportValidity();
+      return;
+    }
+
+    event.preventDefault();
+    window.location.href = "/signup/confirmation";
+  });
+}

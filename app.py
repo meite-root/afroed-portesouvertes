@@ -115,6 +115,14 @@ def signup_profile():
     )
 
 
+@app.route("/signup/confirmation")
+def signup_confirmation():
+    return render_template(
+        "signup_confirmation.html",
+        year=datetime.now().year,
+    )
+
+
 @app.route("/users")
 def users_dashboard():
     users = fetch_users()

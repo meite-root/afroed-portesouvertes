@@ -348,6 +348,53 @@ button:hover {
   gap: 12px;
 }
 
+.confirmation-body .profile-container {
+  padding-bottom: 24px;
+}
+
+.confirmation-card {
+  width: min(420px, 100%);
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 32px 24px 28px;
+  text-align: center;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.12);
+}
+
+.confirmation-card h1 {
+  margin: 0 0 16px;
+  font-size: 32px;
+}
+
+.confirmation-card p {
+  margin: 0 0 16px;
+  color: #4b5563;
+  line-height: 1.5;
+}
+
+.confirmation-placeholder {
+  display: inline-block;
+  min-width: 26px;
+  font-weight: 700;
+}
+
+.confirmation-hands {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px;
+  margin: 16px 0 24px;
+  font-size: 88px;
+}
+
+.confirmation-hands .hand {
+  line-height: 1;
+}
+
+.confirmation-link {
+  text-decoration: none;
+}
+
 /* ======================================================
    Landing page (AfroED core)
 ====================================================== */
