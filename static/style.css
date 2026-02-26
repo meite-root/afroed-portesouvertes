@@ -849,13 +849,6 @@ button:hover {
   margin: 0;
 }
 
-.mentor-logo {
-  font-size: 32px;
-  letter-spacing: 2px;
-  font-weight: 700;
-  color: #4b5563;
-}
-
 .carousel {
   display: grid;
   grid-auto-flow: column;
