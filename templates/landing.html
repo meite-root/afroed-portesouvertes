@@ -27,16 +27,14 @@
     </header>
 
     <section class="hero">
+      <img class="hero-art" src="{{ url_for('static', filename='isolated-color.svg') }}" alt="Illustration of AfroEd layout">
       <div class="hero-text">
         <h1>Orientez-vous mieux.</h1>
         <p>
-          Les opportunités éducatives ne manquent pas. Mais Hélas, vous les
-          manquez souvent, et voilà pourquoi nous avons conçu AfroEd.
-          Dorénavant, restez à l’affût de l’info!
+          Recevez gratuitement par whatsapp des notifications & rappels personnalisés quant aux meilleures opportunités éducatives du moment. restez à l’affût de l’info!
         </p>
         <a class="cta primary" href="{{ url_for('signup') }}">Je m'inscris!</a>
       </div>
-      <img class="hero-art" src="{{ url_for('static', filename='isolated-color.svg') }}" alt="Illustration of AfroEd layout">
     </section>
 
     <section class="mentors">
@@ -47,15 +45,6 @@
         <article class="carousel-card"><img src="{{ url_for('static', filename='schools/aga-khan-academy.png') }}" alt="Logo Aga Khan Academy"><h3>Aga Khan Academy</h3><span>@Mombasa, Kenya</span><p>Une académie d’excellence offrant un cadre international et un accompagnement académique rigoureux.</p></article>
         <article class="carousel-card"><img src="{{ url_for('static', filename='schools/kepler.png') }}" alt="Logo KEPLER"><h3>KEPLER</h3><span>@Kigali, Rwanda</span><p>Un modèle innovant d’enseignement supérieur axé sur les compétences et l’employabilité.</p></article>
       </div>
-    </section>
-
-    <section class="info-card">
-      <div>
-        <h2>L’info éducative en tas.</h2>
-        <p>Recevez gratuitement par whatsapp des notifications & rappels personnalisés quant aux meilleures opportunités éducatives du moment.</p>
-        <a class="pill-button" href="{{ url_for('pathways') }}">Parcours</a>
-      </div>
-      <img class="phone-mock" src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=500&q=80" alt="Preview of AfroEd notifications">
     </section>
 
     <footer class="footer">
