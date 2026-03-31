@@ -41,8 +41,9 @@ form.addEventListener("submit", async (event) => {
   const name = document.getElementById("name").value.trim();
   const phone = document.getElementById("phone").value.trim();
   const consent = document.getElementById("consent");
+  const password = document.getElementById("password").value;
 
-  if (!name || !phone) {
+  if (!name || !phone || !password) {
     if (formStatus) {
       formStatus.textContent = "Veuillez renseigner un nom et un numéro valide.";
       formStatus.classList.add("error");
@@ -63,7 +64,7 @@ form.addEventListener("submit", async (event) => {
     const response = await fetch("/api/signup/send-otp", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, phone }),
+      body: JSON.stringify({ name, phone, password }),
     });
     const payload = await response.json();
     if (!response.ok) {
@@ -100,7 +101,7 @@ verifyButton.addEventListener("click", async () => {
     }
     otpStatus.textContent = "Votre compte est vérifié. Bienvenue !";
     otpStatus.classList.remove("error");
-    window.location.assign("/signup/profile");
+    window.location.assign("/dashboard");
   } catch (error) {
     otpStatus.textContent = error.message;
     otpStatus.classList.add("error");

@@ -1205,3 +1205,12 @@ button:hover {
   margin: 0;
   color: rgba(226,232,240,0.7);
 }
+
+.top-nav {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.top-nav a {
+  font-weight: 600;
+}
