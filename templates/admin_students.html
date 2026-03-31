@@ -1,0 +1,12 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Admin Students</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"></head>
+<body class="dashboard-body"><div class="dashboard">
+  <header class="dashboard-header"><h1>Students</h1><a href="{{ url_for('admin_dashboard') }}">Back</a></header>
+  <form method="get"><input type="text" name="q" value="{{ q }}" placeholder="Search by name/phone/email"><button type="submit">Search</button></form>
+  <section class="dashboard-grid">
+    {% for student in students %}
+      <article class="user-card"><div class="user-info"><h2><a href="{{ url_for('admin_student_detail', student_id=student.id) }}">{{ student.first_name }} {{ student.last_name }}</a></h2><p>{{ student.phone_number }}</p><span>{{ student.email or '-' }}</span></div></article>
+    {% else %}<p>No students found.</p>{% endfor %}
+  </section>
+</div></body></html>

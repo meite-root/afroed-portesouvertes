@@ -1,0 +1,13 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Student Detail</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"></head>
+<body class="dashboard-body"><div class="dashboard">
+  <header class="dashboard-header"><h1>{{ student.first_name }} {{ student.last_name }}</h1><a href="{{ url_for('admin_students') }}">Back</a></header>
+  <section class="privacy-block" style="max-width:none;">
+    <p>Phone: {{ student.phone_number }}</p><p>Email: {{ student.email or '-' }}</p><p>Verified: {{ student.is_verified }}</p><p>Active: {{ student.status }}</p>
+    <h3>Fields</h3>{% for f in student.fields_of_interest %}<p>{{ f.name }}</p>{% else %}<p>None</p>{% endfor %}
+    <h3>Tracked opportunities</h3>{% for so in student.student_opportunities if so.tracked %}<p>{{ so.opportunity.name }}</p>{% else %}<p>None</p>{% endfor %}
+    <h3>Partners</h3>{% for p in student.partners %}<p>{{ p.name }}</p>{% else %}<p>None</p>{% endfor %}
+    <h3>Pathway history</h3>{% for item in pathway_history %}<p>{{ item.created_at.strftime('%Y-%m-%d %H:%M') }} - {{ item.selected_subjects_json }}</p>{% else %}<p>None</p>{% endfor %}
+  </section>
+</div></body></html>

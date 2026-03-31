@@ -1,0 +1,29 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Dashboard</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"></head>
+<body class="dashboard-body"><div class="dashboard">
+  <header class="dashboard-header"><div><h1>Student Dashboard</h1><p>{{ current_user.first_name }} {{ current_user.last_name }}</p></div><div><a href="{{ url_for('pathways') }}">Pathway Finder</a> · <a href="{{ url_for('logout') }}">Logout</a></div></header>
+
+  <section class="dashboard-grid">
+    <article class="user-card"><div class="user-info"><h2>Profile</h2><p>Phone: {{ current_user.phone_number or '-' }}</p><p>Email: {{ current_user.email or '-' }}</p><p>Status: {{ 'Verified' if current_user.is_verified else 'Pending' }}</p></div></article>
+    <article class="user-card"><div class="user-info"><h2>Partners</h2>{% for partner in current_user.partners %}<p>{{ partner.name }}</p>{% else %}<p>No partner associations yet.</p>{% endfor %}</div></article>
+  </section>
+
+  <form method="post" class="privacy-block" style="max-width:none;">
+    <h2>Fields of interest</h2>
+    {% for field in all_fields %}
+      <label><input type="checkbox" name="field_ids" value="{{ field.id }}" {% if field in current_user.fields_of_interest %}checked{% endif %}> {{ field.name }}</label>
+    {% endfor %}
+    <h2>Track opportunities</h2>
+    {% for opportunity in available_opportunities %}
+      <label><input type="checkbox" name="tracked_opportunity_ids" value="{{ opportunity.id }}" {% if opportunity.id in tracked_ids %}checked{% endif %}> {{ opportunity.name }} ({{ opportunity.type.value }})</label>
+    {% else %}<p>No opportunities available.</p>{% endfor %}
+    <button type="submit" class="primary-btn">Save preferences</button>
+  </form>
+
+  <section class="privacy-block" style="max-width:none;"><h2>Pathway history</h2>
+    {% for item in pathway_history %}
+      <p><strong>{{ item.created_at.strftime('%Y-%m-%d %H:%M') }}</strong> — Subjects: {{ item.selected_subjects_json }}</p>
+    {% else %}<p>No pathway requests yet.</p>{% endfor %}
+  </section>
+</div></body></html>

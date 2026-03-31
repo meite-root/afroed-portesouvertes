@@ -12,7 +12,18 @@
       <div class="brand">
         <img class="logo" src="static/default-monochrome.svg" alt="AfroED logo">
       </div>
-      <button class="nav-toggle" type="button" aria-label="Open menu">≡</button>
+      <nav class="top-nav">
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('login') }}">Login</a>
+        <a href="{{ url_for('signup') }}">Signup</a>
+        {% if current_user.is_authenticated %}
+          {% if current_user.role == 'admin' %}
+            <a href="{{ url_for('admin_dashboard') }}">Admin</a>
+          {% else %}
+            <a href="{{ url_for('dashboard') }}">Dashboard</a>
+          {% endif %}
+        {% endif %}
+      </nav>
     </header>
 
     <section class="hero">
@@ -32,175 +43,25 @@
       <h2>Écoles à découvrir</h2>
       <p>Explorez quelques établissements partenaires et préparez vos prochaines candidatures.</p>
       <div class="carousel" aria-label="Écoles partenaires">
-        <article class="carousel-card">
-          <img src="{{ url_for('static', filename='schools/african-leadership-academy.png') }}" alt="Logo African Leadership Academy">
-          <h3>African Leadership Academy</h3>
-          <span>@Johannesburg, Afrique du Sud</span>
-          <p>Un établissement panafricain qui développe le leadership des jeunes pour transformer le continent.</p>
-        </article>
-        <article class="carousel-card">
-          <img src="{{ url_for('static', filename='schools/aga-khan-academy.png') }}" alt="Logo Aga Khan Academy">
-          <h3>Aga Khan Academy</h3>
-          <span>@Mombasa, Kenya</span>
-          <p>Une académie d’excellence offrant un cadre international et un accompagnement académique rigoureux.</p>
-        </article>
-        <article class="carousel-card">
-          <img src="{{ url_for('static', filename='schools/kepler.png') }}" alt="Logo KEPLER">
-          <h3>KEPLER</h3>
-          <span>@Kigali, Rwanda</span>
-          <p>Un modèle innovant d’enseignement supérieur axé sur les compétences et l’employabilité.</p>
-        </article>
-        <article class="carousel-card">
-          <img src="{{ url_for('static', filename='schools/murdock-university-dubai.png') }}" alt="Logo Murdock University Dubai">
-          <h3>Murdock University Dubai</h3>
-          <span>@Dubai, Émirats arabes unis</span>
-          <p>Un campus international qui propose des parcours universitaires reconnus dans un environnement global.</p>
-        </article>
-        <article class="carousel-card">
-          <img src="{{ url_for('static', filename='schools/african-leadership-university-alu.png') }}" alt="Logo African Leadership University">
-          <h3>African Leadership University (ALU)</h3>
-          <span>@Kigali, Rwanda</span>
-          <p>Une université tournée vers l’impact, qui forme les futurs leaders africains autour de projets concrets.</p>
-        </article>
+        <article class="carousel-card"><img src="{{ url_for('static', filename='schools/african-leadership-academy.png') }}" alt="Logo African Leadership Academy"><h3>African Leadership Academy</h3><span>@Johannesburg, Afrique du Sud</span><p>Un établissement panafricain qui développe le leadership des jeunes pour transformer le continent.</p></article>
+        <article class="carousel-card"><img src="{{ url_for('static', filename='schools/aga-khan-academy.png') }}" alt="Logo Aga Khan Academy"><h3>Aga Khan Academy</h3><span>@Mombasa, Kenya</span><p>Une académie d’excellence offrant un cadre international et un accompagnement académique rigoureux.</p></article>
+        <article class="carousel-card"><img src="{{ url_for('static', filename='schools/kepler.png') }}" alt="Logo KEPLER"><h3>KEPLER</h3><span>@Kigali, Rwanda</span><p>Un modèle innovant d’enseignement supérieur axé sur les compétences et l’employabilité.</p></article>
       </div>
     </section>
 
     <section class="info-card">
       <div>
         <h2>L’info éducative en tas.</h2>
-        <p>
-          Recevez gratuitement par whatsapp des notifications & rappels personnalisés
-          quant aux meilleures opportunités éducatives du moment.
-        </p>
+        <p>Recevez gratuitement par whatsapp des notifications & rappels personnalisés quant aux meilleures opportunités éducatives du moment.</p>
         <a class="pill-button" href="{{ url_for('pathways') }}">Parcours</a>
       </div>
       <img class="phone-mock" src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=500&q=80" alt="Preview of AfroEd notifications">
     </section>
 
-    <section class="features">
-      <div class="feature">
-        <div class="feature-icon">i</div>
-        <div>
-          <h3>Inscris-toi</h3>
-          <p>Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint.</p>
-        </div>
-      </div>
-      <div class="feature">
-        <div class="feature-icon">✉</div>
-        <div>
-          <h3>Recois des infos sur-mesure</h3>
-          <p>Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint.</p>
-        </div>
-      </div>
-      <div class="feature">
-        <div class="feature-icon">★</div>
-        <div>
-          <h3>Postule</h3>
-          <p>Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="events">
-      <div class="events-header">
-        <div>
-          <h2>Calendrier des événements</h2>
-          <p>Suivez nos dates clés pour ne rater aucune opportunité.</p>
-        </div>
-        <span class="events-chip">Octobre 2024</span>
-      </div>
-      <div class="events-grid">
-        <div class="calendar">
-          <div class="calendar-weekdays">
-            <span>Lun</span>
-            <span>Mar</span>
-            <span>Mer</span>
-            <span>Jeu</span>
-            <span>Ven</span>
-            <span>Sam</span>
-            <span>Dim</span>
-          </div>
-          <div class="calendar-days">
-            <span class="muted">29</span>
-            <span class="muted">30</span>
-            <span>1</span>
-            <span>2</span>
-            <span>3</span>
-            <span class="event-day">4</span>
-            <span>5</span>
-            <span>6</span>
-            <span>7</span>
-            <span>8</span>
-            <span class="event-day">9</span>
-            <span>10</span>
-            <span>11</span>
-            <span>12</span>
-            <span>13</span>
-            <span>14</span>
-            <span>15</span>
-            <span class="event-day">16</span>
-            <span>17</span>
-            <span>18</span>
-            <span>19</span>
-            <span>20</span>
-            <span>21</span>
-            <span>22</span>
-            <span>23</span>
-            <span>24</span>
-            <span>25</span>
-            <span>26</span>
-            <span>27</span>
-            <span>28</span>
-            <span>29</span>
-            <span>30</span>
-            <span>31</span>
-            <span class="muted">1</span>
-            <span class="muted">2</span>
-          </div>
-        </div>
-        <div class="event-list">
-          <article class="event-card">
-            <div>
-              <p class="event-date">4 oct · 18h00</p>
-              <h3>Webinaire: Trouver la bonne bourse</h3>
-              <p>Session en ligne pour comprendre les critères et préparer son dossier.</p>
-            </div>
-            <span class="event-tag">En ligne</span>
-          </article>
-          <article class="event-card">
-            <div>
-              <p class="event-date">9 oct · 10h00</p>
-              <h3>Atelier CV & lettres de motivation</h3>
-              <p>Coaching collectif animé par nos mentors partenaires.</p>
-            </div>
-            <span class="event-tag">Présentiel</span>
-          </article>
-          <article class="event-card">
-            <div>
-              <p class="event-date">16 oct · 19h30</p>
-              <h3>Live Q&amp;A: Parcours internationaux</h3>
-              <p>Discussion ouverte sur les programmes d’échange et les visas étudiants.</p>
-            </div>
-            <span class="event-tag">Live</span>
-          </article>
-        </div>
-      </div>
-    </section>
-
     <footer class="footer">
-      <nav class="footer-nav">
-        <a href="#">Accueil</a>
-        <a href="#">À propos</a>
-        <a href="#">Nous contacter</a>
-      </nav>
-      <div class="footer-social">
-        <span>f</span>
-        <span>in</span>
-        <span>ig</span>
-      </div>
+      <nav class="footer-nav"><a href="{{ url_for('index') }}">Accueil</a><a href="{{ url_for('login') }}">Login</a><a href="{{ url_for('signup') }}">Signup</a></nav>
       <span>© {{ year }} AfroEd. All rights reserved.</span>
     </footer>
   </main>
-
 </body>
 </html>
